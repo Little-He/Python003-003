@@ -2,6 +2,7 @@
 import scrapy
 import requests
 from scrapy.selector import Selector
+from ..items import MaoyanItem
 
 class MaoyanmovieSpider(scrapy.Spider):
     name = 'maoyanmovie'
@@ -30,7 +31,11 @@ class MaoyanmovieSpider(scrapy.Spider):
             movie_name = movie_hover_title.xpath("./a/div/div[1]/span/text()").extract_first()
             movie_type = movie_hover_title.xpath("./a/div/div[2]/text()").extract()[1].strip()
             movie_date = movie_hover_title.xpath("./a/div/div[4]/text()").extract()[1].strip()
-            items.append({"movie_name":movie_name,"movie_type" : movie_type,"movie_date" : movie_date})
+            item = MaoyanItem()
+            item["movie_name"] = movie_name
+            item["movie_type"] = movie_type
+            item["movie_date"] = movie_date
+            items.append(item)
             i += 1
         return items
 
