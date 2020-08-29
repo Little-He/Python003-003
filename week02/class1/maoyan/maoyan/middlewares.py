@@ -7,6 +7,13 @@
 
 from scrapy import signals
 
+from scrapy.downloadermiddlewares.httpproxy import HttpProxyMiddleware
+from scrapy.exceptions import NotConfigured
+from collections import defaultdict
+from urllib.parse import urlparse
+
+import random
+
 
 class MaoyanSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
@@ -101,3 +108,27 @@ class MaoyanDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+class RandomHttpProxyMiddleware(HttpProxyMiddleware) :
+
+    def __init__(self,http_proxy_list = None):
+        self.proxies = defaultdict(list)
+        for proxy in http_proxy_list:
+            parse = urlparse(proxy)
+            # print(parse)
+            self.proxies[parse.scheme].append(parse.netloc)
+        # print(self.proxies)
+
+    @classmethod
+    def from_crawler(cls,crawler):
+        http_proxy_list = crawler.settings.getlist("HTTP_PROXY_LIST")
+        if not http_proxy_list:
+            raise NotConfigured
+        return cls(http_proxy_list)
+
+    def _set_proxy(self, request, scheme):
+        proxy = random.choice(self.proxies[scheme])
+        # print(proxy)
+        request.meta["proxy"] = proxy
+
+
