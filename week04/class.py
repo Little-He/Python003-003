@@ -55,12 +55,12 @@ df7 = pd.merge(t1, t2, on='id')
 df8 = pd.concat([t1, t2])
 # print(df8)
 
-# 9. DELETE FROM table1 WHERE id=10;
-t9 = t1[ t1['id'] != 10 ]
-print(t9)
+# 9. DELETE FROM maoyanmovie WHERE id=10;
+t9 = df.drop(df[df.id == 10].index)
+# print(t9)
 
-# 10. ALTER TABLE table1 DROP COLUMN column_name;
-t10 = t1.drop('order_time', axis=1)
+# 10. ALTER TABLE maoyanmovie DROP COLUMN type;
+t10 = df.drop('type', axis=1)
 # print(t10)
 
 mysql_conn.close()
