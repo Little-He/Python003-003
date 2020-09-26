@@ -33,7 +33,7 @@ class CommentSpider(scrapy.Spider):
             username = one.xpath('./div/h3/span[2]/a/text()').extract_first()
             pdate = one.xpath('./div/h3/span[2]/span[3]/@title').extract_first()
             starttitle = one.xpath('./div/h3/span[2]/span[2]/@title').extract_first()
-            start = startDict.get(starttitle)
+            start = startDict.get(starttitle,5)
             item = DoubanItem()
             item["content"] = content
             item["cid"] = cid
