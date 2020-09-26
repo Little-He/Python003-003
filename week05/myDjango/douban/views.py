@@ -4,11 +4,13 @@ from django.shortcuts import render
 
 from django.shortcuts import render
 from django.http import HttpResponse
-from . import models
+from .models import Comment
 
 def index(request):
     return HttpResponse("index")
 
 def comment(request,**kwargs):
+    num = Comment.objects.all().count()
+    print(num)
 
-    return HttpResponse(kwargs["id"])
+    return HttpResponse(kwargs["movie_id"])
