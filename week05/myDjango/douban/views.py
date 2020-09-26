@@ -7,7 +7,10 @@ from django.http import HttpResponse
 from .models import Comment
 
 def index(request):
-    return HttpResponse("index")
+    # return HttpResponse("index")
+    content = "This is index page"
+    print(content)
+    return render(request,"index.html",locals())
 
 def comment(request,**kwargs):
     num = Comment.objects.all().count()
