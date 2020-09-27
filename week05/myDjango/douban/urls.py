@@ -7,5 +7,6 @@ from . import views
 
 urlpatterns = [
     path('',views.index),
-    path("<str:comment>/<int:movie_id>.html",views.comment)
+    path("<str:comment>/<int:movie_id>.html",views.comment),
+    path("<str:comment>/q=<str:kw>",views.search)
 ]
