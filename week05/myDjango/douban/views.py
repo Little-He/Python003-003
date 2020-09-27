@@ -14,9 +14,6 @@ def index(request):
     return render(request,"index.html",locals())
 
 def comment(request,**kwargs):
-
     total = Comment.objects.all().count()
-
     list = Comment.objects.filter(star__gt=3)
-    print(list[0].pdate.strftime('%Y-%m-%d %H:%M:%S'))
     return render(request,"comment.html",locals())

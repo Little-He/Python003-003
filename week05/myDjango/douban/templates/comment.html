@@ -17,7 +17,7 @@
     {% for item in list %}
     <tr>
         <td>{{item.username}}</td>
-        <td>{{item.star}}</td>
+        <td>{{item.star | default:"5"}}</td>
         <td>{{item.content}}</td>
         <td>{{ item.pdate|date:"Y-m-d H:m:s" }}</td>
     </tr>
