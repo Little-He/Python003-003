@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>总条数：{{total}}</h3>
+<table>
+    <tr>
+        <td width="10%">用户</td>
+        <td width="5%">星级</td>
+        <td>内容</td>
+        <td width="15%">评论时间</td>
+    </tr>
+    {% for item in list %}
+    <tr>
+        <td>{{item.username}}</td>
+        <td>{{item.star}}</td>
+        <td>{{item.content}}</td>
+        <td>{{ item.pdate|date:"Y-m-d H:m:s" }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
