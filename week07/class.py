@@ -65,10 +65,10 @@ class Zoo(object):
 if __name__ == "__main__" :
     # 实例化一只猫，属性包括名字、类型、体型、性格
     cat1 = Cat('大花猫 1', '食肉', '小', '温顺')
+    cat2 = Cat('大花猫 2', '食肉', '小', '温顺')
     # print(cat1.is_pet)
     # print(cat1.is_fierce)
     # print(cat1.sound)
-    cat2 = Cat('大花猫 2', '食肉', '小', '温顺')
 
     z = Zoo('时间动物园')
     z.add_animal(cat1)
@@ -77,3 +77,5 @@ if __name__ == "__main__" :
     # 动物园是否有猫这种动物
     have_cat = hasattr(z, 'Cat')
     print(have_cat)
+
+    # print(Cat.mro())
