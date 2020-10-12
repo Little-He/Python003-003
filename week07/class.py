@@ -51,14 +51,14 @@ class Zoo(object):
 
     def __init__(self,name):
         self.name = name
-        self._animals = set()
+        self.__animals = set()
 
     def add_animal(self,animal:Animal):
         class_name = animal.__class__.__name__
-        if class_name in self._animals :
+        if class_name in self.__animals :
             print(f"{class_name} ({animal.name}) is already exists ！")
         else:
-            self._animals.add(class_name)
+            self.__animals.add(class_name)
             setattr(self,class_name,class_name)
 
 
