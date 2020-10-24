@@ -1,0 +1,17 @@
+list
+tuple
+str
+dict
+collections.deque
+
+#视频第二课
+偏平序列(只能容纳一种数据类型)
+str
+容器序列(可以存放不同的数据类型)
+list tuple dict collections.deque
+
+#视频第一课
+可变序列
+list  dict collections.deque
+不可变序列
+tuple  str
