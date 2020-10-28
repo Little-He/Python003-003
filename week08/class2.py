@@ -3,14 +3,10 @@
 
 # 兼容add函数...
 def newmap(func,*iter):
-    print(iter)
-    try:
-        i = 0
-        while True:
-            yield func(*[j[i] for j in iter])
-            i+=1
-    except Exception :
-        pass
+    newiter = zip(*iter)
+    for i in newiter:
+        yield func(*i)
+
 
 
 def func(x):
