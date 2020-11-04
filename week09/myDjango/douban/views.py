@@ -6,12 +6,22 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Comment
+from .form import LoginForm
+from django.contrib.auth import  authenticate,login
 
 def index(request):
     # return HttpResponse("index")
     content = "This is index page"
     print(content)
     return render(request,"index.html",locals())
+
+def login(request) :
+    if request.method == "POST":
+        print(request.POST)
+    if request.method == "GET":
+        login_form = LoginForm()
+        return  render(request,"login.html",{'form': login_form})
+
 
 def comment(request,**kwargs):
     total = Comment.objects.all().count()
