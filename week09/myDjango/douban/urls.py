@@ -7,7 +7,8 @@ from . import views
 
 urlpatterns = [
     path('',views.index),
-    path('login',views.login),
+    path('userlogin',views.userlogin),
+    path('userloginout',views.userloginout),
     path("<str:comment>/<int:movie_id>.html",views.comment),
     path("<str:comment>/q=<str:kw>",views.search)
 ]
