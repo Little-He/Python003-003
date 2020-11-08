@@ -4,11 +4,11 @@ from django.db.models import Q
 # Create your views here.
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from .models import Comment
 from .form import LoginForm
-from django.contrib.auth import  authenticate,login
-from django.utils.http import urlquote
+from django.contrib.auth import  authenticate,login,logout
+from django.utils.http import urlquote,urlunquote
 
 def index(request):
     # return HttpResponse("index")
@@ -18,13 +18,15 @@ def index(request):
 
 def userlogin(request) :
     if request.method == "POST":
+
         login_from = LoginForm(request.POST)
         if login_from.is_valid():
             data = login_from.cleaned_data
             user = authenticate(username=data["username"],password=data["password"])
             if (user):
+                callback = urlunquote(request.POST["callback"])
                 login(request,user)
-                return HttpResponse("登录成功")
+                return HttpResponseRedirect(callback)
             else:
                 return HttpResponse("登录失败")
 
@@ -34,12 +36,15 @@ def userlogin(request) :
         return  render(request,"login.html",{'form': login_form,'callback':callback})
 
 def userloginout(request):
-    pass
+    callback = urlunquote(request.META["HTTP_REFERER"])
+    logout(request)
+    print(request.user)
+    return HttpResponseRedirect(callback)
 
 def comment(request,**kwargs):
     total = Comment.objects.all().count()
     list = Comment.objects.filter(star__gt=3)
-    print(request.get_full_path())
+    print(request.user.is_authenticated)
     return render(request,"comment.html",locals())
 
 def search(request,**kwargs):
